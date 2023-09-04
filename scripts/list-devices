@@ -1,0 +1,1 @@
+clj -M -m midi-mpv.core --list-devices

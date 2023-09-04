@@ -19,7 +19,7 @@
 
 (defn mpv-command
   [socket-path s]
-  (println "mpv-command" s)
+  (println "mpv-command" socket-path (pr-str s))
   (with-open [writer (socket-writer socket-path)]
     (.println writer s)))
 

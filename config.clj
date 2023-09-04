@@ -37,12 +37,14 @@
 
     (+ (octave 4) C) "set pause yes"          ;; pause
     (+ (octave 4) D) "set pause no"           ;; play
-    (+ (octave 4) C#) "set panscan 1.0"       ;; panscan on
-    (+ (octave 4) D#) "set panscan 0.0"       ;; panscan off
     (+ (octave 4) E) "set mute yes"           ;; mute
     (+ (octave 4) F) "set mute no"            ;; unmute
     (+ (octave 4) G) "set sub-visibility no"  ;; subs off
     (+ (octave 4) A) "set sub-visibility yes" ;; subs on
+    (+ (octave 4) B) "ab-loop" ;; ab-loop start/end/off
+
+    (+ (octave 4) C#) "set panscan 1.0"       ;; panscan on
+    (+ (octave 4) D#) "set panscan 0.0"       ;; panscan off
 
     ;; (+ (octave 4) F#) "multiply speed 1/1.1" ;; slower
     ;; (+ (octave 4) G#) "set speed 1.0"        ;; reset to normal
@@ -51,8 +53,6 @@
     (+ (octave 4) F#) "seek -5" ;; jump back 5 secs like left arrow key
     (+ (octave 4) G#) "cycle pause" ;; toggle pause
     (+ (octave 4) A#) "seek 5" ;; jump forward 5 secs like right arrow key
-
-    (+ (octave 4) B) "ab-loop" ;; ab-loop start/end/off
 
     ;; Absolute speed settings. Maybe tweak some of these...
     (+ (octave 5) 0) "set speed 0.1"

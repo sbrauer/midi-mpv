@@ -6,7 +6,10 @@
 (def midi-device-name "IAC Driver IAC Bus 1")
 (def base-socket-path "/tmp/mpv-socket")
 
-(defn playlist-play-index-commands
+;; Note these depend on a custom MPV script (included in the repo).
+;; The standard MPV playlist-play-index command would work
+;; if it tolerated index out of bounds, but instead MPV crashes!
+(defn playlist-commands
   [start num]
   (into {}
         (for [n (range num)]
@@ -66,10 +69,10 @@
 
 (def commands
   {:note-on
-   (merge (playlist-play-index-commands (octave 2) (octave 1))
-          (seek-commands (octave 3))
-          (misc-commands (octave 4))
-          (speed-commands (octave 5)))})
+   (merge (playlist-commands (octave 2) (octave 1))
+          (seek-commands     (octave 3))
+          (misc-commands     (octave 4))
+          (speed-commands    (octave 5)))})
 
 ;; FIXME: extend to support pitch-bend (for speed) and mod wheel CC #1 for seek.
 (defn event->command

@@ -3,8 +3,7 @@
 (def midi-device-name "IAC Driver IAC Bus 1")
 (def base-socket-path "/tmp/mpv-socket")
 
-(def commands ;; FIXME: Add some CC commands at least as examples; say pitchbend to speed or modwheel for seek.
-  ;; FIXME: Perhaps also add support for multiple sockets and figure out how to route events to sockets.
+(def commands
   {:note-on
    ;; DRY this up ofc
    {(+ (octave 2) 0) "script-message-to sammy safe-playlist-play-index 0"
@@ -33,8 +32,6 @@
     (+ (octave 3) 10) "seek 83 absolute-percent"
     (+ (octave 3) 11) "seek 91 absolute-percent"
 
-    ;; FIXME: Are these misc mappings good?  Maybe tweak. Used to have a few cycle commands, but replaced with sets.
-
     (+ (octave 4) C) "set pause yes"          ;; pause
     (+ (octave 4) D) "set pause no"           ;; play
     (+ (octave 4) E) "set mute yes"           ;; mute
@@ -45,11 +42,9 @@
 
     (+ (octave 4) C#) "set panscan 1.0"       ;; panscan on
     (+ (octave 4) D#) "set panscan 0.0"       ;; panscan off
-
     ;; (+ (octave 4) F#) "multiply speed 1/1.1" ;; slower
     ;; (+ (octave 4) G#) "set speed 1.0"        ;; reset to normal
     ;; (+ (octave 4) A#) "multiply speed 1.1"   ;; faster
-
     (+ (octave 4) F#) "seek -5" ;; jump back 5 secs like left arrow key
     (+ (octave 4) G#) "cycle pause" ;; toggle pause
     (+ (octave 4) A#) "seek 5" ;; jump forward 5 secs like right arrow key

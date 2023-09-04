@@ -9,7 +9,6 @@ midi-mpv --list-devices")
 
 (defn -main
   [& args]
-  ;; FIXME: use a lib to parse args
   (case (first args)
 
     "--list-devices"

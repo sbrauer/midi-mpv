@@ -4,8 +4,6 @@
            [java.nio.channels Channels]
            [java.io PrintWriter]))
 
-;; FIXME: Use log instead of println
-
 (defn device-descriptions
   []
   (mapv :description (midi/midi-sources)))

@@ -67,17 +67,24 @@
    (+ start 11) "set speed 3.0"
    (+ start 12) "set speed 4.0"})
 
-(def commands
-  {:note-on
-   (merge (playlist-commands (octave 2) (octave 1))
-          (seek-commands     (octave 3))
-          (misc-commands     (octave 4))
-          (speed-commands    (octave 5)))})
+(def note-commands
+  (merge (playlist-commands (octave 2) (octave 1))
+         (seek-commands     (octave 3))
+         (misc-commands     (octave 4))
+         (speed-commands    (octave 5))))
 
-;; FIXME: extend to support pitch-bend (for speed) and mod wheel CC #1 for seek.
+(defn handle-cc
+  [cc v]
+  (when (= 1 cc) ;; mod wheel
+    (let [percent (* 100 (/ v 127.0))]
+      (format "seek %s absolute-percent" percent))))
+
 (defn event->command
-  [{:keys [command data1] :as event}]
-  (get-in commands [command data1]))
+  [{:keys [command data1 data2] :as event}]
+  (case command
+    ;; FIXME: extend to support pitch-bend (for speed)
+    :note-on (get note-commands data1)
+    :control-change (handle-cc data1 data2)))
 
 (defn event->socket-path
   [{:keys [channel] :as event}]

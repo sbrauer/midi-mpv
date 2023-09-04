@@ -4,9 +4,4 @@
   com.github.jnr/jnr-unixsocket {:mvn/version "0.38.20"}}
 
  :paths
- ["src" "resources"]
-
- :aliases
- {:test {:extra-paths ["test"]
-         :extra-deps  {lambdaisland/kaocha {:mvn/version "0.0-521"}
-                       org.clojure/test.check {:mvn/version "RELEASE"}}}}}
+ ["src" "resources"]}

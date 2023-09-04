@@ -1,8 +1,11 @@
 (ns midi-mpv.core
   (:gen-class)
-  (:require [midi-mpv.app :as app]
-            ;; FIXME
-            [midi-mpv.config :as config]))
+  (:require [midi-mpv.app :as app]))
+
+(def usage
+  "Usage:
+midi-mpv --start config.clj
+midi-mpv --list-devices")
 
 (defn -main
   [& args]
@@ -14,10 +17,11 @@
       (println dev))
 
     "--start"
-    ;; FIXME: how do we let users pass this in???
-    ;; Maybe we get filename as string then... (clojure.main/load-script "config.clj")
-    ;; Contract is that we expect the file to (def config ,,,)
-    (app/go! config/config)
+    (do
+      (let [script (second args)]
+        (assert script "--start requires a script filename.")
+        ;; We expect the return value of the script (the final expression) to be a config map.
+        (let [config (clojure.main/load-script script)]
+          (app/go! config))))
 
-    ;; help
-    (println "Expected --start or --list-devices.")))
+    (println usage)))

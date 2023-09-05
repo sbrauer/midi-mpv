@@ -16,11 +16,10 @@ midi-mpv --list-devices")
       (println dev))
 
     "--start"
-    (do
-      (let [script (second args)]
-        (assert script "--start requires a script filename.")
-        ;; We expect the return value of the script (the final expression) to be a config map.
-        (let [config (clojure.main/load-script script)]
-          (app/go! config))))
+    (let [script (second args)]
+      (assert script "--start requires a script filename.")
+      ;; We expect the return value of the script (the final expression) to be a config map.
+      (let [config (clojure.main/load-script script)]
+        (app/go! config)))
 
     (println usage)))

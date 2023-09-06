@@ -17,11 +17,19 @@
 (def A# 10)
 (def B  11)
 
-;; Could be used to interpret the data1 and data2 from a :pitch-bend command event.
 (defn calculate-14-bit-value
   "Calculates the the 14 bit value given two integers
-representing the high and low parts of a 14 bit value."
+  representing the high and low parts of a 14 bit value.
+  Returns an intege in the range 0 to 16383."
   [lower higher]
   (bit-or (bit-and lower 0x7f)
           (bit-shift-left (bit-and higher 0x7f)
                           7)))
+
+(defn interpret-pitch-bend-data
+  "Given data1 and data2 values from a midi pitchbend event, return a value in the range of -1.0 to 1.0, where 0.0 represents the middle value (no bend)."
+  [data1 data2]
+  (let [middle 8192
+        v14 (calculate-14-bit-value data1 data2)]
+    (/ (- v14 middle)
+       (float (dec middle)))))

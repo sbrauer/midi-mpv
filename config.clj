@@ -6,6 +6,10 @@
 (def midi-device-name "IAC Driver IAC Bus 1")
 (def base-socket-path "/tmp/mpv-socket")
 
+;; Prefs for pitch-bend -> speed
+(def top-speed 4.0)
+(def bottom-speed 0.25)
+
 ;; Note these depend on a custom MPV script (included in the repo).
 ;; The standard MPV playlist-play-index command would work
 ;; if it tolerated index out of bounds, but instead MPV crashes!
@@ -68,10 +72,15 @@
    (+ start 12) "set speed 4.0"})
 
 (def note-commands
-  (merge (playlist-commands (octave 2) (octave 1))
-         (seek-commands     (octave 3))
-         (misc-commands     (octave 4))
-         (speed-commands    (octave 5))))
+  ;; These start at the low C of my 49 key midi keyboard (with default octave shift).
+  (merge (playlist-commands (octave 3) (octave 1))
+         (seek-commands     (octave 4))
+         (misc-commands     (octave 5))
+         (speed-commands    (octave 6))))
+
+(comment
+  ;; Handy when inspecting the note commands in a REPL
+  (sort note-commands))
 
 (defn handle-cc
   [cc v]
@@ -79,12 +88,22 @@
     (let [percent (* 100 (/ v 127.0))]
       (format "seek %s absolute-percent" percent))))
 
+(defn handle-pb
+  [v1 v2]
+  (let [pb (interpret-pitch-bend-data v1 v2)
+        normal-speed 1.0
+        speed (cond
+                (pos? pb) (+ normal-speed (* pb (- top-speed    normal-speed)))
+                (neg? pb) (+ normal-speed (* pb (- normal-speed bottom-speed)))
+                :default  normal-speed)]
+    (format "set speed %s" speed)))
+
 (defn event->command
   [{:keys [command data1 data2] :as event}]
   (case command
-    ;; FIXME: extend to support pitch-bend (for speed)
     :note-on (get note-commands data1)
-    :control-change (handle-cc data1 data2)))
+    :control-change (handle-cc data1 data2)
+    :pitch-bend (handle-pb data1 data2)))
 
 (defn event->socket-path
   [{:keys [channel] :as event}]

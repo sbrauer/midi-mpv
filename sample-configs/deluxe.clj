@@ -1,9 +1,7 @@
-;; Sample config file
-;; Config is the map at the end of the file.
+;; Sample midi mapper file with kitchen sink full of features.
 
 (use 'midi-mpv.util)
 
-(def midi-device-name "IAC Driver IAC Bus 1")
 (def base-socket-path "/tmp/mpv-socket")
 
 ;; Prefs for pitch-bend -> speed
@@ -109,12 +107,10 @@
   [{:keys [channel] :as event}]
   (format "%s.%s" base-socket-path channel))
 
-(defn midi-event->action
+;; This is the mapper function itself.
+;; Clojure implicitly returns the final expression evaluated.
+(fn midi-event->action
   [event]
-  (when-let [command (event->command event)]
+ (when-let [command (event->command event)]
     {:socket-path (event->socket-path event)
      :command     command}))
-
-;; This is it - the config map in all its glory...
-{:midi-device-name   midi-device-name
- :midi-event->action midi-event->action}

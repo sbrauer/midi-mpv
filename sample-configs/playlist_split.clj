@@ -5,7 +5,6 @@
 
 (use 'midi-mpv.util)
 
-(def midi-device-name "IAC Driver IAC Bus 1")
 (def base-socket-path "/tmp/mpv-socket")
 
 ;; Note values for keyboard split
@@ -37,14 +36,10 @@
   [idx]
   (format "%s.%s" base-socket-path idx))
 
-(defn midi-event->action
+(fn midi-event->action
   [{:keys [command note] :as event}]
   (when (= :note-on command)
     (when-let [idx (note->idx note)]
       {:socket-path (socket-path idx)
        :command (let [start (if (zero? idx) start1 start2)]
                   (playlist-command (- note start)))})))
-
-;; This is it - the config map in all its glory...
-{:midi-device-name   midi-device-name
- :midi-event->action midi-event->action}

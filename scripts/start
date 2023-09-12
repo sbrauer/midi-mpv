@@ -1,1 +1,1 @@
-clj -M -m midi-mpv.core --start config.clj
+clj -M -m midi-mpv.core --start sample-configs/deluxe.clj

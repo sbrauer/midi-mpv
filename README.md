@@ -8,10 +8,7 @@ Use the expressive power of Clojure to map midi events (note-on, control-change,
 
 You can control multiple MPV instances (by routing commands to distinct sockets).
 
-Refer to sample config file [config.clj](config.clj) which routes by midi channel.
-
-Routing by channel is just one possibility. Keyboard splits (routing by note-on note) would be a piece of cake.
-Pretty much anything you might imagine doing based on midi event data should be feasible.
+Refer to [sample mappers](sample-mappers) to get an idea of the midi mapping possibilities.
 
 ## Installation
 

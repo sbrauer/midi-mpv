@@ -1,7 +1,6 @@
-;; Sample config file with keyboard split
+;; Sample mapper file with keyboard split
 ;; where left side triggers clips for first MPV
 ;; and right side triggers clips for second MPV.
-;; Config is the map at the end of the file.
 
 (use 'midi-mpv.util)
 

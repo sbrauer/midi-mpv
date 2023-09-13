@@ -108,9 +108,10 @@
   (format "%s.%s" base-socket-path channel))
 
 ;; This is the mapper function itself.
+;; Needs to be the last thing in the file since
 ;; Clojure implicitly returns the final expression evaluated.
 (fn midi-event->action
   [event]
- (when-let [command (event->command event)]
+  (when-let [command (event->command event)]
     {:socket-path (event->socket-path event)
      :command     command}))

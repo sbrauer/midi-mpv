@@ -1,4 +1,4 @@
-(ns midi-mpv.core
+(ns midi-mpv.cli
   (:gen-class)
   (:require [midi-mpv.app :as app]))
 

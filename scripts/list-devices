@@ -1,1 +1,3 @@
-clj -M -m midi-mpv.core --list-devices
+# Prints out all the input devices on your system.
+# Use one of them as the value for MIDI_INPUT_DEVICE env var when starting midi-mpv.
+clj -M -m midi-mpv.cli --list-devices

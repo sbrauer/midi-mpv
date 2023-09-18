@@ -1,4 +1,5 @@
 # Example script to start up midi-mpv with a specific device and mapper.
+# Intended to be run in a terminal and interrupted with Ctrl-C.
 # Change MIDI_INPUT_DEVICE to match your system.
-# Not sure what device name to use? Try running the list-devices script.
-MIDI_INPUT_DEVICE="IAC Driver IAC Bus 1" clj -M -m midi-mpv.core --start sample-mappers/deluxe.clj
+# Not sure what device name to use? Try running the list-devices script to see your options.
+MIDI_INPUT_DEVICE="IAC Driver IAC Bus 1" clj -M -m midi-mpv.cli --start sample-mappers/deluxe.clj

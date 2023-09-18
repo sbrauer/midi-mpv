@@ -43,7 +43,8 @@
   (case command
     :note-on (get note-commands data1)
     :control-change (handle-cc data1 data2)
-    :pitch-bend (handle-pb data1 data2)))
+    :pitch-bend (handle-pb data1 data2)
+    nil))
 
 (defn event->socket-path
   [{:keys [channel] :as event}]

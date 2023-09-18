@@ -2,11 +2,15 @@
 # The most critical detail is that you give each MPV instance its own dedicated socket file.
 # The sample mappers assume a naming convention like `/tmp/mpv-socket.0`, `/tmp/mpv-socket.1`, etc.
 
-if [ "$1" = "" ]
+PLAYLIST="$1"
+
+if [ "$PLAYLIST" = "" ]
 then
   echo "Missing dir or playlist argument"
   exit 1
 fi
+
+MPV_OPTS="--fullscreen --loop-file=inf --loop-playlist --video-osd=no --keep-open-pause=no"
 
 # The following works on my Mac and Linux systems. YMMV
 MPV=mpv
@@ -16,8 +20,8 @@ then
   MPV=$MAC_MPV
 fi
 
-$MPV --input-ipc-server=/tmp/mpv-socket.0 --screen=0 --keep-open=yes --keep-open-pause=no --loop-playlist --fullscreen --loop-file=inf --video-osd=no "$1" &
+$MPV --input-ipc-server=/tmp/mpv-socket.0 --screen=0 $MPV_OPTS "$PLAYLIST" &
 
 # Uncomment to run a second instance on the second screen
-# In this example, we start with the same dir/playlist as the first.
-#$MPV --input-ipc-server=/tmp/mpv-socket.1 --screen=1 --keep-open=yes --keep-open-pause=no --loop-playlist --fullscreen --loop-file=inf --video-osd=no "$1" &
+# In this example, we start with the same dir/playlist as the first but that's just one possibility...
+#$MPV --input-ipc-server=/tmp/mpv-socket.1 --screen=1 $MPV_OPTS "$PLAYLIST" &

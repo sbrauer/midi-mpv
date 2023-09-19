@@ -18,8 +18,11 @@
 (defn mpv-command!
   [socket-path s]
   (println "mpv-command!" socket-path (pr-str s))
-  (with-open [writer (socket-writer socket-path)]
-    (.println writer s)))
+  (try
+    (with-open [writer (socket-writer socket-path)]
+      (.println writer s))
+    (catch java.io.IOException e
+      (println "Exception trying to write to socket" socket-path (.getMessage e)))))
 
 (defn go!
   [{:keys [midi-device-name midi-event->action] :as config}]

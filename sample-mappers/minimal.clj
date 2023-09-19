@@ -1,4 +1,4 @@
-;; Really minimal config file example.
+;; Rather minimal config file example.
 ;; Pause/unpause in response to any midi note-on event.
 
 (fn [{:keys [command] :as event}]

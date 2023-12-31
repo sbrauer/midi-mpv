@@ -1,4 +1,4 @@
-;; Sample midi mapper file
+;; Example midi mapper file
 ;; This one has an octave of playlist triggers
 ;; followed by a few octaves of seeks.
 ;; Also includes modwheel -> seek and pitchbend -> speed.

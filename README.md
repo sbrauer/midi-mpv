@@ -8,13 +8,13 @@ Use the expressive power of Clojure to map midi events (note-on, control-change,
 
 You can control multiple MPV instances (by routing commands to distinct sockets).
 
-Refer to [sample mappers](sample-mappers) to get an idea of the midi mapping possibilities.
+Refer to [example mappers](example-mappers) to get an idea of the midi mapping possibilities.
 
 ## Usage
 
 You'll need to [install Clojure](https://clojure.org/guides/install_clojure) if you don't already have it.
 
-Many of the sample mappers depend on a custom MPV script that provides an alternative command to play a specific playlist item.
+Many of the example mappers depend on a custom MPV script that provides an alternative command to play a specific playlist item.
 Copy [sammy.lua](mpv/scripts/sammy.lua) to your MPV scripts folder (`~/.mpv/scripts`).
 
 Start up one or more instances of MPV such that each instance creates its own socket for receiving commands.
@@ -25,7 +25,7 @@ Startup this app. You'll need to:
 - specify a Clojure script that provides a function mapping midi events to MPV commands
 
 As an example, see the included script [start](scripts/start).
-You could use one of the included [sample mappers](sample-mappers), or use one of them as a starting point for your own mapper.
+You could use one of the included [example mappers](example-mappers), or use one of them as a starting point for your own mapper.
 
 ## References
 

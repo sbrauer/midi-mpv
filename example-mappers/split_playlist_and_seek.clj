@@ -1,4 +1,4 @@
-;; Sample mapper file with keyboard split
+;; Example mapper file with keyboard split
 ;; where left side triggers clips for first MPV
 ;; and right side triggers clips for second MPV.
 

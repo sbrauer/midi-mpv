@@ -1,4 +1,4 @@
-;; Sample midi mapper file with kitchen sink full of features.
+;; Example midi mapper file with kitchen sink full of features.
 
 (use 'midi-mpv.util)
 

@@ -1,4 +1,4 @@
-;; Sample midi mapper file
+;; Example midi mapper file
 ;; This one maps a few octaves of note-on events to seek commands.
 ;; Also includes modwheel -> seek and pitchbend -> speed.
 (use 'midi-mpv.util)

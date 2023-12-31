@@ -1,4 +1,4 @@
-;; Sample midi mapper file
+;; Example midi mapper file
 ;; This one has a bunch of playlist triggers for a range of note-on events.
 ;; Also includes modwheel -> seek and pitchbend -> speed.
 
